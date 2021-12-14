@@ -22,9 +22,6 @@ export default class App extends Component {
     let cart, inventory
     cart = new Cart('anonymousUser');
     inventory = new Products()
-    cart.addItemToCart(inventory.productList[0],2) // temp
-    cart.addItemToCart(inventory.productList[1],3)
-
     this.setState({products:inventory, cart})
   }
   shiftAnimation(dir,t){ // 'menu' or 'cart'
