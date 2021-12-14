@@ -1,0 +1,28 @@
+
+:root{
+  --MainColor:  #5C9E95;
+  --SecondColor: #31EBD2;
+  --ThirdColor: #D6FFFA;
+  --FourthColor: #9F3A0D;
+  --FifthColor: #EBA283;
+
+  --Whiteish: hsl(10,0%,95%);
+  --Blinds: hsla(200, 30%, 10%, 0.6);
+}
+html{
+  /* background:var(--MainColor); */
+  font-family: fantasy;
+  min-width: 550px;
+}
+body{
+  letter-spacing: 5px;
+  color:black;
+  text-align: center;
+  margin:0;
+  padding:0;
+  background-color: var(--MainColor);
+  overflow-x:hidden;
+}
+img{
+  cursor:pointer;
+}

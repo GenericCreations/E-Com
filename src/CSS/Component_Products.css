@@ -1,0 +1,338 @@
+.everythingContainer{
+  display:block;
+  padding:0;
+  margin:0;
+  height:100%;
+  box-sizing: border-box;
+  overflow:hidden;
+}
+
+.navContainer{
+    background-color:var(--MainColor);
+    padding:.5rem 1.5rem;
+    padding-bottom: 0;
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    font-size: 2rem;
+    position:relative;
+  }
+  .navIntro{
+    flex:1;
+    text-align: center;
+  }
+  .navContainer span > img {
+    width:22px;
+    box-sizing: border-box;
+    margin-left:1rem;
+  }
+  .navContainer h3{
+    margin:0;
+    padding:0;
+    font-size: 1.2rem;
+  }
+
+.products_container{
+    /* display:inline-block; */
+    background-color:var(--Whiteish);
+    position:absolute;
+    width:100%;
+    transition-duration: 1s;
+    left:0;
+  }
+  .coverForOffset{
+    z-index: 3;
+    background-color: var(--Blinds);
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+
+  }
+  .filterProducts{
+      display:flex;
+      align-items: center;
+      background:hsla(1,5%,90%, .7);
+      padding:2px 0;
+    }
+    .filterProducts span{
+      display:inline-block;
+      margin:0 1rem;
+      align-items: center;
+
+    }
+    .filterProducts img{
+      height:30px;
+    }
+    .filterInput{
+        flex:1;
+        text-align: left;
+      }
+      .filterInput input{
+        outline:none;
+        border:none;
+        margin:0;
+        padding:5px 1rem;
+        font-size: 1.5rem;
+        border-radius: .5rem;
+        text-transform: capitalize;
+      }
+
+
+  .itemContainer{
+      display:flex;
+      box-shadow: 5px 2px 5px 4px gray;
+      border-radius: 1rem;
+      margin: 1rem .5rem;
+      justify-content: flex-start;
+      cursor:pointer;
+      position:relative;
+    }
+    .itemContainer span{
+
+    }
+    .item_image{
+        padding:.5rem 1rem;
+      }
+      .item_image img{
+        max-width:100px;
+        min-height:90px;
+      }
+    .item_details{
+        flex:1;
+        padding:1rem 0;
+        text-align: left;
+      }
+      .item_details h3{
+        margin:0;
+        font-size:1.5rem
+      }
+      .item_details h4{
+        margin:0;
+        font-size:1.2rem
+      }
+    .item_icons{
+        display:block;
+        position:absolute;
+        bottom:0;
+      }
+      .item_icons img{
+      }
+
+.menuContainer{
+    position:absolute;
+    left:0;
+    top:10%;
+    width:50%;
+  }
+  .menuContainer ul{
+    list-style-type: none;
+    font-size:2.5rem;
+    padding:0;
+  }
+  .menuContainer li{
+    margin:3rem 0;
+    padding:0;
+    cursor:pointer;
+  }
+
+.checkoutContainer{
+    position:absolute;
+    right:0;
+    top:13%;
+    width:70%;
+    z-index: -1;
+    text-align:center;
+  }
+  .checkoutContainer h1{
+    font-size: 2rem
+  }
+  .checkoutContainer ul{
+    padding:0;
+    list-style-type: none;
+    font-size:1rem;
+  }
+  .checkoutContainer li{
+    margin:0;
+    padding:0;
+  }
+  .checkoutContainer input{
+    border: none;
+    padding:1rem 4rem;
+    font-size:1.5rem;
+    background: var(--FourthColor);
+    border-radius: .5rem;
+    color:var(--SecondColor);
+    cursor:pointer;
+  }
+  .checkoutContainer span{
+      display:flex;
+
+      text-align: left;
+      margin-right:30%;
+      margin-top:2rem;
+    }
+    .checkoutContainer h3{
+      margin:0;
+      font-size: 1rem;
+    }
+    .checkoutContainer h2{
+      margin:0;
+      font-size: 1.5rem;
+    }
+  .checkoutTotals{
+    display:block;
+    text-align: left;
+  }
+  .checkoutContainer.pageTwo input{
+    padding:.5rem 4rem;
+    box-sizing: border-box;
+  }
+  .checkoutTable{
+      margin:2rem auto;
+      width:100%;
+      padding:0 1rem;
+      border-spacing:0;
+
+    }
+    .checkoutTable tbody{
+    }
+    .checkoutTable tfoot{
+      padding-top:2rem;
+      display:block;
+    }
+    .checkoutTable tr{
+    }
+    .checkoutTable td{
+      /* margin:0 auto; */
+      text-align: left;
+      /* background:green; */
+    }
+    .checkoutTotals td:nth-child(2){
+      /* background:green; */
+      text-align: right;
+      padding-left:2rem;
+    }
+    .checkoutTotals tr:nth-child(4){
+      /* border-top:1px solid black; */
+      font-size:2rem;
+    }
+  .checkoutItem{
+    display:block;
+    white-space: nowrap;
+    text-align: left;
+    position:relative;
+    /* background:blue; */
+  }
+  .checkoutItem span{
+    display:inline-block;
+    margin:0 1rem;
+    text-align: left;
+    overflow:hidden;
+    /* background:green; */
+  }
+  .itemTotals{
+    position:absolute;
+    right:0;
+    bottom:0;
+    text-align: right;
+    box-sizing: border-box;
+
+  }
+  .itemTotals h2{
+    text-align: right;
+
+  }
+  .checkoutItem img{
+    width:5rem;
+    border:1px solid black;
+  }
+  .checkoutItem h2{
+    margin:0;
+    font-size:1.5rem;
+  }
+  .checkoutItem h3{
+    margin:0;
+    font-size:1rem;
+  }
+  input.quantityInput {
+    all:unset;
+    background:gray;
+    border-radius: .5rem;
+    text-align: center;
+    width:40px;
+    padding:2px 5px;
+    margin:0;
+  }
+
+  .ShippingAddressForm{
+      display:block;
+      margin:4rem 1rem;
+
+    }
+    .ShippingAddressForm span{
+      display:block;
+      /* background:gray; */
+      margin:0;
+    }
+    .ShippingAddressForm label{
+      display:block;
+      padding-left:2rem;
+      font-size: .8rem;
+    }
+    .ShippingAddressForm input{
+      all:unset;
+      /* background:blue; */
+      display:block;
+      background:gray;
+      width:100%;
+      padding:1rem;
+    }
+  .BillingAddressForm{
+      display:block;
+      margin:1rem;
+
+    }
+    .BillingAddressForm span{
+      display:block;
+      /* background:gray; */
+      margin:0;
+    }
+    .BillingAddressForm label{
+      display:block;
+      padding-left:2rem;
+      font-size: .8rem;
+    }
+    .BillingAddressForm input{
+      all:unset;
+      /* background:blue; */
+      display:block;
+      background:gray;
+      width:100%;
+      padding:1rem;
+    }
+
+  .PaymentMethodForm{
+    /* background:gray; */
+    margin:4rem 1rem;
+  }
+    .PaymentMethodForm span{
+      display:block;
+      /* background:gray; */
+      margin:0;
+    }
+    .PaymentMethodForm label{
+      display:block;
+      padding-left:2rem;
+      font-size: .8rem;
+    }
+    .PaymentMethodForm input{
+      all:unset;
+      /* background:blue; */
+      display:block;
+      background:gray;
+      width:100%;
+      padding:1rem;
+    }
