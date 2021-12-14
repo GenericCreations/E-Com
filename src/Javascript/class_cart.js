@@ -3,14 +3,15 @@
 export default class Cart{
   constructor(username){
     this.owner = username
-    this.productList = [
-      // { item, quantity }
-    ]
+    this.productList = [/* { item, quantity } */]
   }
 
-  addItemToCart(item,quantity){
+  addItemToCart(item,quantity){ // if first item , make sure to turn cart icon into full cart !!!!!
+
+
     // is item in cart already ? increase quantity
     // if not, just push it to the list
+
     const cart = this.productList
     let existing = undefined
 
@@ -25,6 +26,8 @@ export default class Cart{
     if(existing) return this.productList
 
     this.productList.push({item,quantity})
+    const len = this.productList.length
+    if(this.productList.length <= 1) // TURN ON FULL CART ICON
 
     return this.productList
   }
@@ -56,6 +59,9 @@ export default class Cart{
     })
 
     return acc/100
+  }
+  toggleCartIcon(){
+    
   }
 
 }
