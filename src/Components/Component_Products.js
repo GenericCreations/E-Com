@@ -19,7 +19,7 @@ export default class Products extends Component{
             <img src={item.image} alt='Item Image'></img>
           </span>
           <span className='item_details'>
-            <h3>{item.name}name</h3>
+            <h3>{item.name}</h3>
             <h4>${(item.price/100).toFixed(2)}</h4>
             <span className='item_icons'>
               <img
