@@ -141,13 +141,23 @@
 .checkoutContainer{
     position:absolute;
     right:0;
-    top:13%;
+    top:0;
+    padding-top:5rem;
     width:70%;
     z-index: -1;
     text-align:center;
+    font-family:fantasy,'Sans-serif';
+    font-weight: normal;
+    letter-spacing: 2px;
   }
   .checkoutContainer h1{
     font-size: 2rem
+  }
+  .checkoutContainer h1 > input:nth-child(1){
+    margin-right:10%;
+    color:var(--FifthColor);
+    font-size:1.1rem;
+    padding:.5rem 2rem;
   }
   .checkoutContainer ul{
     padding:0;
@@ -184,7 +194,7 @@
     }
   .checkoutTotals{
     display:block;
-    text-align: left;
+    text-align: right;
   }
   .checkoutContainer.pageTwo input{
     padding:.5rem 4rem;
@@ -211,12 +221,9 @@
       /* background:green; */
     }
     .checkoutTotals td:nth-child(2){
-      /* background:green; */
-      text-align: right;
       padding-left:2rem;
     }
     .checkoutTotals tr:nth-child(4){
-      /* border-top:1px solid black; */
       font-size:2rem;
     }
   .checkoutItem{

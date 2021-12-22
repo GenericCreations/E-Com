@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../CSS/Component_Products.css'
+import '../CSS/Products_Component.css'
 import FilterIcon from '../Icons/filter.png'
 import SearchIcon from '../Icons/search.png'
 import AddToCartIcon from '../Icons/addToBag.png'
@@ -12,7 +12,12 @@ export default class Products extends Component{
 
   createListToShow(list){
     return list.map( (item, i) => {
-      // console.log('item object: ',item);
+      const addItemToCart_complete = () => {
+        const newProductListInCart = this.props.t.state.cart.addItemToCart(item,1)
+        if(newProductListInCart?.length >= 1)
+          this.props.t.toggleCartEmpty(this.props.t,false)
+        else console.console.log('failed to add item to cart');
+      }
       return (
         <div className='itemContainer' key={i}>
           <span className='item_image'>
@@ -27,7 +32,7 @@ export default class Products extends Component{
                 alt='Add To Cart'
                 width='35'
                 height='35'
-                onClick={ () =>  this.props.t.state.cart.addItemToCart(item,1) }
+                onClick={ () =>  addItemToCart_complete() }
               />
             </span>
           </span>
@@ -37,15 +42,15 @@ export default class Products extends Component{
   }
   render(){
     let list;
-    const productList = this.props?.prods?.productList
+    const productList = this.props.t.state.products?.productList
     if(productList && productList.length >= 1){
       list = this.createListToShow(productList)
     } else {
       list = <div>No Products To Show</div>
     }
     return(
-        <div className='products_container' style={{left:this.props.offset}}>
-          { this.props.offset === '0' ? null : <div onClick={ () => this.props.shiftFunc('none',this.props.t)} className='coverForOffset'></div>}
+        <div className='products_container' style={{left:this.props.t.state.offset}}>
+          { this.props.t.state.offset === '0' ? null : <div onClick={ () => this.props.t.shiftAnimation('none',this.props.t)} className='coverForOffset'></div>}
           <div className='filterProducts'>
             <span className='filterInput'><input type='text' autoComplete='off' /></span>
             <span><img src={SearchIcon} alt='filter'/></span>

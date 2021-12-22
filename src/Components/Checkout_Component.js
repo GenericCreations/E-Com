@@ -8,24 +8,59 @@ export default class Checkout extends Component{
     super(props)
     this.state = {
       page:0,
-      productList:[],
       cartTotal:0,
+      cart:this.props.t.state.cart
     }
   }
+  modifyItemQuantity(e,item){
 
+    const val = e.target.value
+    let newQuantity = Number(val), newCartTotal
+    const zeroQuantityDelay = 3000
+
+    if(val === '') return
+
+    else if(newQuantity <= 0){
+      if(newQuantity < 0){
+        e.target.value = 0
+        newQuantity = 0
+      }
+      // newQuantity can/will only be zero ( 0 )!!
+
+      setTimeout(() => { // takes this product out of cart and rerenders
+        this.state.cart.changeQuantity(item.id,newQuantity)
+        newCartTotal = this.state.cart.findCartTotal()
+        this.props.t.toggleCartEmpty(this.props.t,true)
+        this.setState({cartTotal:newCartTotal})
+      },1500)
+    }
+    else{
+      this.state.cart.changeQuantity(item.id,newQuantity)
+      newCartTotal = this.state.cart.findCartTotal()
+      this.setState({cartTotal:newCartTotal})
+    }
+
+  }
+  componentDidMount(){
+    const list = this.state.cart?.productList
+    const cartTotal = list?.length >= 1 ? this.state.cart.findCartTotal() : 0
+    this.setState({cartTotal})
+  }
+  recalculateCartTotal(){
+    const cartTotal = this.state.cart.findCartTotal()
+    this.setState({cartTotal})
+  }
   render(){
     const cartPage = () => {
       const loadCart = () => {
-        const cart = this.props.t.state.cart
-        const list = cart.productList
+        const list = this.state.cart?.productList
 
-        if(list < 1) return <div>noCart</div>
-        let cartTotalCost
+        if(!list?.length >= 1) return <div>Only you and me in here</div>
 
         return (
           <ul>
             { list.map(( Item, i ) => {
-              console.log('item: ',Item.item);
+              // console.log('item: ',Item.item);
               const item = Item.item
               const quant = Item.quantity
               const _price = item.getPrice()
@@ -41,9 +76,7 @@ export default class Checkout extends Component{
                           className='quantityInput'
                           type='number'
                           defaultValue={quant}
-                          onChange={(e)=>{
-
-                          }}
+                          onChange={ (e) => this.modifyItemQuantity(e,item) }
                         />
                       </h3>
                     </span>
@@ -61,15 +94,23 @@ export default class Checkout extends Component{
         const productList = th.props.t.state.cart.productList
         th.setState({productList,page:1})
       }
+      const _cart = loadCart()
       return (
+
         <div className='checkoutContainer'>
-          <h1>Cart - edit?</h1>
-          { loadCart() }
-          <h1>${commaNumber(this.state.cartTotal === 0 ? this.props.t.state.cart.findCartTotal().toFixed(2) : this.state.cartTotal.toFixed(2))}</h1>
-          <input type='button' value='Proceed to checkout' onClick={ () => collectInfo(this) }/>
+          <h1>Cart</h1>
+          { _cart }
+          <h1>
+            { this.state.cartTotal > 0 ? '$'+commaNumber(this.state.cartTotal.toFixed(2)) : null }
+          </h1>
+          {
+            this.state.cartTotal > 0 ?
+              <input type='button' value='Proceed to checkout' onClick={ () => collectInfo(this) }/> :
+              null
+          }
       </div>
       )
-    }
+    } // done
     const checkoutPage = () => {
       const makeTableForCheckout = (cart) => {
         const _list = cart.productList
@@ -84,7 +125,7 @@ export default class Checkout extends Component{
               { _list.map((Item, i) => {
                 const item = Item.item
                 return (
-                  <tr>
+                  <tr key={i}>
                     <td>{item.name}</td>
                     <td>{Item.quantity} @ {item.getPrice()} / each</td>
                     <td>{ ((item.price * Item.quantity)/100).toFixed(2) }</td>
@@ -119,24 +160,24 @@ export default class Checkout extends Component{
           <div className='ShippingAddressForm'>
             <h2>Shipping Address</h2>
             <span>
-              <label for='address'>Address:</label>
-              <input type='text' for='address'/>
+              <label htmlFor='address'>Address:</label>
+              <input type='text' htmlFor='address'/>
             </span>
             <span>
-              <label for='town'>Town / City:</label>
-              <input type='text' for='town'/>
+              <label htmlFor='town'>Town / City:</label>
+              <input type='text' htmlFor='town'/>
             </span>
             <span>
-              <label for='state'>State:</label>
-              <input type='text' for='state'/>
+              <label htmlFor='state'>State:</label>
+              <input type='text' htmlFor='state'/>
             </span>
             <span>
-              <label for='zip'>Zip Code:</label>
-              <input type='number' for='zip'/>
+              <label htmlFor='zip'>Zip Code:</label>
+              <input type='number' htmlFor='zip'/>
             </span>
             <span>
-              <label for='phone'>Phone:</label>
-              <input type='number' for='phone'/>
+              <label htmlFor='phone'>Phone:</label>
+              <input type='number' htmlFor='phone'/>
             </span>
           </div>
         )
@@ -146,20 +187,20 @@ export default class Checkout extends Component{
           <div className='BillingAddressForm'>
             <h2>Billing Address</h2>
             <span>
-              <label for='address'>Address:</label>
-              <input type='text' for='address'/>
+              <label htmlFor='address'>Address:</label>
+              <input type='text' htmlFor='address'/>
             </span>
             <span>
-              <label for='town'>Town / City:</label>
-              <input type='text' for='town'/>
+              <label htmlFor='town'>Town / City:</label>
+              <input type='text' htmlFor='town'/>
             </span>
             <span>
-              <label for='state'>State:</label>
-              <input type='text' for='state'/>
+              <label htmlFor='state'>State:</label>
+              <input type='text' htmlFor='state'/>
             </span>
             <span>
-              <label for='zip'>Zip Code:</label>
-              <input type='number' for='zip'/>
+              <label htmlFor='zip'>Zip Code:</label>
+              <input type='number' htmlFor='zip'/>
             </span>
           </div>
         )
@@ -170,32 +211,38 @@ export default class Checkout extends Component{
           <div className='PaymentMethodForm'>
             <h2>Payment Method</h2>
             <span>
-              <label for='name'>Name On Card:</label>
-              <input type='text' for='name'/>
+              <label htmlFor='name'>Name On Card:</label>
+              <input type='text' htmlFor='name'/>
             </span>
             <span>
-              <label for='cardNumber'>Card Number:</label>
-              <input type='number' for='cardNumber'/>
+              <label htmlFor='cardNumber'>Card Number:</label>
+              <input type='number' htmlFor='cardNumber'/>
             </span>
             <span>
-              <label for='exp'>Expiration Date:</label>
-              <input type='text' for='exp'/>
+              <label htmlFor='exp'>Expiration Date:</label>
+              <input type='text' htmlFor='exp'/>
             </span>
             <span>
-              <label for='cvc'>CVC:</label>
-              <input type='text' for='cvc'/>
+              <label htmlFor='cvc'>CVC:</label>
+              <input type='text' htmlFor='cvc'/>
             </span>
           </div>
         )
       }
+      const backToCart = () => {
+        this.setState({page:0})
+      }
 
-      const cart = this.props.t.state.cart
+      const cart = this.state.cart
 
-      if(cart.productList < 1) return <div>noItems</div>
+      if(cart.productList < 1) this.setState({page:0})
 
       return (
         <div className='checkoutContainer pageTwo'>
-          <h1><input type='button' value='Place order'/> </h1>
+          <h1>
+            <input type='button' value='Edit Cart' onClick={ () => backToCart()}/>
+            <input type='button' value='Place order'/>
+          </h1>
           { makeTableForCheckout(cart) }
           { shippingAddressForm() }
           { billingAddressForm() }
