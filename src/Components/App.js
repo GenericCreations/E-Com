@@ -27,7 +27,6 @@ export default class App extends Component {
     const inventory = new Products()
     const users = new Users()
     const user = users.userList[0];
-    console.log('created all users ... ',users);
     this.loginUser(this,user)
 
 
@@ -65,13 +64,11 @@ export default class App extends Component {
       userToBeLoggedIn = user
       cartEmpty = user.myCart.productList > 0 ? false : true
       console.log('logging in real user',userToBeLoggedIn);
-
     }
     else{
       userToBeLoggedIn = new User({type:'anonymous'}) // make this an actual anonymous user
       cartEmpty = true
       console.log('logging in anonymous user',userToBeLoggedIn);
-
     }
 
     appComponent.setState({

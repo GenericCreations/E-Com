@@ -27,7 +27,7 @@ img{
   cursor:pointer;
 }
 input{
-
+    outline:none;
   }
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,

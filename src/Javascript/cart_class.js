@@ -30,7 +30,7 @@ export default class Cart{
     const len = this.productList.length
     if(this.productList.length <= 1) {// TURN ON FULL CART ICON
       console.log('Cart now has items');
-}
+    }
     return this.productList
   }
   rmItemFromCart(item,quantity){
